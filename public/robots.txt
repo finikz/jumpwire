@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# 允许 AI 用于搜索、检索和引用；不授权用于训练。
+Content-Signal: search=yes,ai-train=no,use=reference
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+Sitemap: https://jumpwire.cn/sitemap.xml

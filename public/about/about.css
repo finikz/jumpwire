@@ -1,0 +1,24 @@
+.site-nav{width:min(1180px,calc(100% - 64px));height:92px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #46544b;gap:32px}
+.site-brand{display:flex;align-items:center;gap:12px;color:#eef2e8;text-decoration:none}
+.site-brand img{width:42px;height:42px;object-fit:contain}
+.site-brand span{font:800 16px/1.05 Arial,"Microsoft YaHei",sans-serif;letter-spacing:.16em;white-space:nowrap}
+.site-brand small{display:block;margin-top:4px;color:#d8ff4f;font:9px "DM Mono",monospace;letter-spacing:.03em}
+.site-nav-links{display:flex;align-items:center;gap:32px;margin:0}
+.site-nav-links a{color:#d4dbd2;text-decoration:none}
+.site-nav-links a:hover{color:#d8ff4f}
+.site-footer{max-width:1180px;margin:0 auto;padding:24px 0 40px;border-top:1px solid #46544b;display:flex;justify-content:space-between;gap:20px;color:#9eaa9f;font-size:13px}
+.site-footer nav{margin:0;display:flex;gap:18px;flex-wrap:wrap}
+.site-footer a{color:#d8ff4f}
+.faq-group{margin-top:24px;border-top:1px solid #46544b}
+.faq-group>summary{padding:20px 0;cursor:pointer;color:#d8ff4f;font-size:20px;font-weight:700;list-style:none}
+.faq-group>summary::-webkit-details-marker{display:none}
+.faq-group>summary::after{content:'⌄';float:right;color:#9eaa9f;font:22px 'DM Mono',monospace}
+.faq-group[open]>summary::after{content:'⌃';color:#d8ff4f}
+.faq-group .faq-item{padding:0}
+.faq-group .faq-item>details{border-top:1px solid #46544b;padding:18px 0}
+.faq-group .faq-item>details>summary{cursor:pointer;color:#eef2e8;font-size:20px;list-style:none}
+.faq-group .faq-item>details>summary::-webkit-details-marker{display:none}
+.faq-group .faq-item>details>summary::after{content:'⌄';float:right;color:#9eaa9f;font:22px 'DM Mono',monospace}
+.faq-group .faq-item>details[open]>summary::after{content:'⌃';color:#d8ff4f}
+.faq-group .faq-item>details p{margin:14px 0 0}
+@media(max-width:640px){.site-nav{width:calc(100% - 36px);height:74px;gap:10px}.site-nav-links{gap:10px;font-size:10px;white-space:nowrap}.site-footer{width:calc(100% - 36px);display:block;padding:24px 0 40px}.site-footer nav{margin-top:16px}}

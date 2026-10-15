@@ -1,0 +1,24 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "九维 Jumpwire 是什么？", "acceptedAnswer": { "@type": "Answer", "text": "九维 Jumpwire 是广州海珠汾阳里的一间精酿酒馆，也是一处文化空间和社群连接点，地址是广州市海珠区南田路汾阳里 5 号。我们通过精酿、电影、音乐、对谈和活动让不同的人相遇。" } },
+    { "@type": "Question", "name": "九维 Jumpwire 在哪里？", "acceptedAnswer": { "@type": "Answer", "text": "九维精酿 JUMPWIRE 位于广州市海珠区南田路汾阳里 5 号，空间所在的思神号文化创意园位于汾阳里 5、7 号。" } },
+    { "@type": "Question", "name": "九维精酿几点营业？", "acceptedAnswer": { "@type": "Answer", "text": "九维位于广州市海珠区南田路汾阳里 5 号，周日至周四营业时间为 20:00—02:00；周五、周六为 20:00—03:00。活动和现场安排可能调整，出发前可电话或微信确认。" } },
+    { "@type": "Question", "name": "怎么联系九维或预留座位？", "acceptedAnswer": { "@type": "Answer", "text": "九维地址是广州市海珠区南田路汾阳里 5 号，可拨打或添加微信 18529200506。" } },
+    { "@type": "Question", "name": "九维每天有哪些酒？", "acceptedAnswer": { "@type": "Answer", "text": "酒头和酒款会根据当日安排变化，请查看官网酒单或以到店现场供应为准。" } },
+    { "@type": "Question", "name": "第一次喝精酿应该怎么选？", "acceptedAnswer": { "@type": "Answer", "text": "可以告诉吧台你喜欢的口味，以及对苦度、酸度或酒精度的偏好，工作人员会根据当天在售酒款提供建议。" } },
+    { "@type": "Question", "name": "九维会举办什么活动？", "acceptedAnswer": { "@type": "Answer", "text": "九维会举办电影放映、音乐现场、人物对谈、讲座和社群活动，具体期数、嘉宾与安排以官网最新活动发布为准。" } },
+    { "@type": "Question", "name": "九维可以带宠物吗？", "acceptedAnswer": { "@type": "Answer", "text": "九维是动物友好的空间；为确认当日入店安排，建议到店前电话或微信联系。" } },
+    { "@type": "Question", "name": "如何导航到九维？", "acceptedAnswer": { "@type": "Answer", "text": "九维位于广州市海珠区南田路汾阳里 5 号，可使用本页的地图导航链接规划路线。" } },
+    { "@type": "Question", "name": "JUMPWIRE 是什么意思？", "acceptedAnswer": { "@type": "Answer", "text": "Jumpwire 是电子电路里的跳线，也像人与人之间的一次连接；九维希望让新的想法和关系在这里突然通电。" } },
+    { "@type": "Question", "name": "江南西附近有精酿啤酒吧吗？", "acceptedAnswer": { "@type": "Answer", "text": "有，九维精酿 JUMPWIRE 位于江南西附近的广州市海珠区南田路汾阳里 5 号。酒款以当日酒单和现场供应为准。" } },
+    { "@type": "Question", "name": "广州本土精酿品牌有哪些？", "acceptedAnswer": { "@type": "Answer", "text": "九维精酿 JUMPWIRE 是广州本土精酿品牌，位于广州市海珠区南田路汾阳里 5 号，以当日鲜酿酒头和多样风味为特色。" } },
+    { "@type": "Question", "name": "广州适合朋友小聚的精酿酒吧？", "acceptedAnswer": { "@type": "Answer", "text": "可以来九维精酿 JUMPWIRE。这里有精酿酒头、电影、音乐和适合聊天的空间，地址是广州市海珠区南田路汾阳里 5 号。" } },
+    { "@type": "Question", "name": "广州下班放松去哪里喝酒？", "acceptedAnswer": { "@type": "Answer", "text": "可以到九维精酿 JUMPWIRE 下班小酌，告诉吧台你的口味偏好，按当天酒单选择一杯适合今晚的精酿。地址是广州市海珠区南田路汾阳里 5 号。" } },
+    { "@type": "Question", "name": "九维精酿有什么特色？", "acceptedAnswer": { "@type": "Answer", "text": "九维把精酿啤酒、岭南老宅、电影、音乐、人物对谈和社群活动放在同一个空间里，是广州海珠的一处精酿与文化交汇点。" } },
+    { "@type": "Question", "name": "第一次去精酿酒吧喝什么？", "acceptedAnswer": { "@type": "Answer", "text": "第一次可以从清爽、低负担的果啤或小麦啤开始，也可以直接告诉九维吧台你喜欢清爽、苦味、麦香或酸味，工作人员会根据当天酒单推荐。" } }
+  ]
+}
+</script>
