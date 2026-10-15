@@ -28,9 +28,42 @@ const englishFallbackBeers = [
   { tap: 3, name: 'Midnight Stout', brewery: 'JUMPWIRE Craft Beer', style: 'Imperial Stout', priceLarge: null, priceMedium: null },
 ]
 
+const englishBeerNames = {
+  '阿嫲的冰箱': "Grandma's Fridge",
+  '金乌': 'Golden Crow',
+  '魔都姑娘': 'Shanghai Girl',
+  '冇得糖': 'No Sugar',
+  '爽气': 'Refreshing',
+  '跳东湖 拾全拾美': 'Into East Lake: Perfect Ten',
+  '外星人': 'Alien',
+  '初月': 'New Moon',
+}
+
+const englishBeerStyles = {
+  '增味西打': 'Flavoured Cider',
+  '苦橙花柠檬草海盐古斯': 'Bitter Orange Blossom, Lemongrass & Sea Salt Gose',
+  '接骨木风味起泡果酒': 'Sparkling Elderflower Fruit Wine',
+  '皮尔森': 'Pilsner',
+  '徳式拉格': 'German Lager',
+  '德式拉格': 'German Lager',
+  '西海岸双倍IPA': 'West Coast Double IPA',
+  '三倍干投IPA': 'Triple Dry-Hopped IPA',
+}
+
+const englishBreweryNames = {
+  '九维精酿': 'JUMPWIRE Craft Beer',
+  '山乘': 'Sheng Craft Beer',
+  '会饮': 'Huiyin Brewing',
+  '鲸乐': 'Whale Well',
+  '拾捌': 'NO.18 Brewing & Co.',
+  '尝玖': 'Changjiu Brewing',
+}
+
 const prices = (large, medium, english = false) => large == null && medium == null ? '' : `${english ? 'Large' : '大杯'} ¥${((large || 0) / 100).toFixed(0)} · ${english ? 'Medium' : '中杯'} ¥${((medium || 0) / 100).toFixed(0)}`
 
-const beerStyleLabel = (beer, english = false) => [english && beer.brewery === '九维精酿' ? 'JUMPWIRE Craft Beer' : beer.brewery, beer.style || (english ? 'Craft beer' : '精酿啤酒')].filter(Boolean).join(' · ')
+const beerDisplayName = (beer, english = false) => english ? englishBeerNames[beer.name] || beer.name : beer.name
+
+const beerStyleLabel = (beer, english = false) => [english ? englishBreweryNames[beer.brewery] || beer.brewery : beer.brewery, english ? englishBeerStyles[beer.style] || beer.style || 'Craft beer' : beer.style || '精酿啤酒'].filter(Boolean).join(' · ')
 
 const toCnyPrice = (value) => {
   const cents = Number(value)
@@ -494,7 +527,7 @@ function EnglishMenuPage() {
       const name = ({ '小麦啤': 'Wheat Beer', '果啤': 'Fruit Beer', '世涛': 'Stout', '波特': 'Porter', '其他精酿': 'Other Craft Beer' })[rawName] || rawName
       result[name] ||= { '@type': 'MenuSection', name, hasMenuItem: [] }
       const offers = [['Large', toCnyPrice(beer.priceLarge)], ['Medium', toCnyPrice(beer.priceMedium)]].filter(([, price]) => price !== null).map(([size, price]) => ({ '@type': 'Offer', name: size, price, priceCurrency: 'CNY' }))
-      result[name].hasMenuItem.push({ '@type': 'MenuItem', name: beer.name, description: beer.description || beer.style || 'Craft beer on tap today', offers: offers.length === 1 ? offers[0] : offers })
+      result[name].hasMenuItem.push({ '@type': 'MenuItem', name: beerDisplayName(beer, true), description: beer.description || beerStyleLabel(beer, true) || 'Craft beer on tap today', offers: offers.length === 1 ? offers[0] : offers })
       return result
     }, {})
     const script = document.createElement('script')
@@ -511,7 +544,7 @@ function EnglishMenuPage() {
       <header className="menu-page-header"><p className="eyebrow">JUMPWIRE · GUANGZHOU · HAIZHU</p><h1>Beer Menu</h1><p>From crisp to full-bodied, every pour brings something different.</p></header>
       <section className="beer-section menu-beer-section"><div className="beer-panel">
         <div className="beer-heading"><h2>On Tap Today</h2><span>WHAT'S ON TAP FOR TODAY?</span></div>
-        <div className="beer-list">{tapBeers.length > 0 ? tapBeers.map((beer, index) => <div className={`beer-row ${index === 0 ? 'featured' : ''}`} key={`${beer.tap}-${beer.name}`}><span className="beer-no">{String(beer.tap).padStart(2, '0')}</span><div className="beer-info"><strong>{beer.name}</strong><span>{beerStyleLabel(beer, true)}</span></div><b>{prices(beer.priceLarge, beer.priceMedium, true) || 'Available'}</b></div>) : <p className="beer-empty">No beers are currently on tap. Please ask our team.</p>}</div>
+        <div className="beer-list">{tapBeers.length > 0 ? tapBeers.map((beer, index) => <div className={`beer-row ${index === 0 ? 'featured' : ''}`} key={`${beer.tap}-${beer.name}`}><span className="beer-no">{String(beer.tap).padStart(2, '0')}</span><div className="beer-info"><strong>{beerDisplayName(beer, true)}</strong><span>{beerStyleLabel(beer, true)}</span></div><b>{prices(beer.priceLarge, beer.priceMedium, true) || 'Available'}</b></div>) : <p className="beer-empty">No beers are currently on tap. Please ask our team.</p>}</div>
         <p className="beer-note">Ask the bar team what they would recommend today.</p>
       </div></section>
       <section className="menu-image-section"><h2>Whisky · Full Bottles</h2><p>700 ml bottles for in-store enjoyment. Mixers are charged separately.</p><div className="menu-page-list"><div className="menu-page-item"><span>Johnnie Walker Black Label 12 Years</span><strong>¥398</strong></div><div className="menu-page-item"><span>Jameson</span><strong>¥368</strong></div><div className="menu-page-item"><span>Glenfiddich 12 Years</span><strong>¥598</strong></div><div className="menu-page-item"><span>Glenfiddich 15 Years</span><strong>¥888</strong></div><div className="menu-page-item"><span>Glenfiddich 18 Years</span><strong>¥1,488</strong></div><div className="menu-page-item"><span>The Singleton 12 Years</span><strong>¥598</strong></div><div className="menu-page-item"><span>The Singleton 16 Years</span><strong>¥988</strong></div><div className="menu-page-item"><span>The Dalmore 12 Years</span><strong>¥1,288</strong></div><div className="menu-page-item"><span>The Balvenie DoubleWood 12 Years</span><strong>¥1,188</strong></div><div className="menu-page-item"><span>The Macallan Double Cask 12 Years</span><strong>¥1,588</strong></div></div></section>
@@ -552,7 +585,7 @@ function EnglishHomePage() {
   return <main>
     <PageNav english />
     <section id="top" className="hero shell"><div className="hero-copy reveal"><p className="eyebrow">GUANGZHOU · HAIZHU · OPENED MAY 2022</p><h1>Craft Beer<br /><em>JUMPWIRE</em></h1><p className="hero-intro">A meeting place for craft beer and culture. Find fresh beer, music, films, conversations and community events.</p><a className="arrow-button" href="#events">Explore <span>↓</span></a></div><div className="hero-visual reveal delay-1" aria-hidden="true"><div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="hero-mark"><img src="/brand-logo-jumpwire.png" alt="" /></div><div className="hero-caption">A SMALL PLACE<br />FOR BIG TASTES</div></div></section>
-    <section className="beer-section"><div className="beer-panel shell"><div className="beer-heading"><h2>On Tap Today</h2><span>WHAT'S ON TAP FOR TODAY?</span></div><div className="beer-list">{tapBeers.length > 0 ? tapBeers.map((beer, index) => <div className={`beer-row ${index === 0 ? 'featured' : ''}`} key={`${beer.tap}-${beer.name}`}><span className="beer-no">{String(beer.tap).padStart(2, '0')}</span><div className="beer-info"><strong>{beer.name}</strong><span>{beerStyleLabel(beer, true)}</span></div><b>{prices(beer.priceLarge, beer.priceMedium, true) || 'Available'}</b></div>) : <p className="beer-empty">No beers are currently on tap. Please ask our team.</p>}</div><p className="beer-note">Ask our team what they recommend today.</p><a className="section-more" href="/en/menu/">View the menu <span>↗</span></a></div></section>
+    <section className="beer-section"><div className="beer-panel shell"><div className="beer-heading"><h2>On Tap Today</h2><span>WHAT'S ON TAP FOR TODAY?</span></div><div className="beer-list">{tapBeers.length > 0 ? tapBeers.map((beer, index) => <div className={`beer-row ${index === 0 ? 'featured' : ''}`} key={`${beer.tap}-${beer.name}`}><span className="beer-no">{String(beer.tap).padStart(2, '0')}</span><div className="beer-info"><strong>{beerDisplayName(beer, true)}</strong><span>{beerStyleLabel(beer, true)}</span></div><b>{prices(beer.priceLarge, beer.priceMedium, true) || 'Available'}</b></div>) : <p className="beer-empty">No beers are currently on tap. Please ask our team.</p>}</div><p className="beer-note">Ask our team what they recommend today.</p><a className="section-more" href="/en/menu/">View the menu <span>↗</span></a></div></section>
     <section id="events" className="events shell"><div className="section-label">01 / WHAT'S HAPPENING</div><div className="scene-heading"><h2>Happening Here</h2><p>Craft beer is the beginning.<br /><em>Connections happen in person.</em></p></div><div className="scene-gallery"><figure className="scene-feature"><img src="/images/jumpwire-event.jpg?v=20260903b" alt="Guests at a JUMPWIRE event" /><figcaption>Films, music, conversations and friends ready to share a table.</figcaption></figure><div className="scene-stack"><figure><img src="/images/jumpwire-about.jpg?v=20260903b" alt="Friends meeting at JUMPWIRE" /><figcaption>A room of people sharing their evenings.</figcaption></figure><figure><img src="/images/jumpwire-live.jpg?v=20260903b" alt="Live music at JUMPWIRE" /><figcaption>Music lets the room grow beyond its walls.</figcaption></figure></div></div><div className="events-heading"><h2>Events at JUMPWIRE</h2><p>The taproom is more than a backdrop.<br />It is part of the story.</p></div><div className="event-grid">{englishEvents.map((event, index) => { const expanded = expandedEvent === index; const expandable = event.images.length > 0; const toggle = () => expandable && setExpandedEvent(expanded ? null : index); return <article className={`event-card ${expanded ? 'expanded' : ''} ${expandable ? 'expandable' : ''}`} key={event.title} role={expandable ? 'button' : undefined} tabIndex={expandable ? '0' : undefined} aria-expanded={expandable ? expanded : undefined} onClick={toggle} onKeyDown={(e) => { if (expandable && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggle() } }}><div className="event-top"><span>{event.type}</span><b>{event.date}</b></div><img className="event-cover" src={`${event.cover}?v=20260909`} alt={`${event.title} event cover`} /><h3>{event.title}</h3><p>{event.text}</p>{expanded && <div className="event-images">{event.images.map((image) => <img key={image} src={`${image}?v=20260909`} alt={`${event.title} event photo`} />)}</div>}{expandable && <span className="event-arrow">{expanded ? '−' : '+'}</span>}</article> })}</div><a className="section-more" href="/en/events/">More events <span>↗</span></a></section>
     <section className="notes-preview shell" aria-labelledby="notes-preview-title"><div className="notes-preview-heading"><div><div className="section-label">JUMPWIRE / CRAFT BEER NOTES</div><h2 id="notes-preview-title">Craft Beer Notes</h2></div></div><a className="notes-feature" href="/en/notes/what-is-craft-beer/"><div className="notes-feature-visual"><img src="/notes/what-is-craft-beer-cover.jpg" alt="A golden beer with malt and hops" /></div><div className="notes-feature-copy"><span>CRAFT BEER BASICS · SEP 14, 2026</span><h3>What Are We Drinking When We Drink Craft Beer?</h3><p>How do water, malt, hops and yeast shape a beer’s flavour? Start with the brewing band, no jargon required.</p><b>Read the note <span>→</span></b></div></a><a className="section-more" href="/en/notes/">Explore all notes <span>↗</span></a></section>
     <section id="about" className="manifesto shell"><div className="section-label">02 / ABOUT JUMPWIRE</div><div className="manifesto-grid"><h2>What is<br /><span>JUMPWIRE?</span></h2><div className="manifesto-text"><p>JUMPWIRE opened in May 2022 in a Lingnan heritage house in Fenyangli, Haizhu, Guangzhou. It is a craft beer taproom, cultural space and community hub where people come together over craft beer, films, music, conversations and events.</p><p>Craft beer is the beginning. The old house is the setting. What stays with us is the connection between people.</p></div></div><figure className="section-photo manifesto-photo"><img src="/images/home-manifesto.jpg?v=20260903d" alt="A film screening and audience at JUMPWIRE" /><figcaption>A screening brings strangers into the same room.</figcaption></figure><div className="principles"><article><span>01</span><h3>Craft, Fermented</h3><p>From crisp to full-bodied, every pour brings something different.</p></article><article><span>02</span><h3>Culture, In Motion</h3><p>Films, music, conversations and a table that makes room for people.</p></article><article><span>03</span><h3>Connections, Across Fields</h3><p>People from different worlds exchange ideas in the same room.</p></article></div></section>
