@@ -405,6 +405,7 @@ function HomePage() {
 
     const script = document.createElement('script')
     script.async = true
+    script.id = 'jumpwire-gtm'
     script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5KM7DR2X'
     document.head.appendChild(script)
 
