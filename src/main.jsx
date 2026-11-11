@@ -396,7 +396,7 @@ function HomePage() {
     document.title = '九维精酿｜Jumpwire'
   }, [])
 
- = (id) => {  useEffect(() => {
+  useEffect(() => {
     if (window.location.pathname !== '/') return undefined
 
     window.dataLayer = window.dataLayer || []
@@ -411,7 +411,7 @@ function HomePage() {
     return () => script.remove()
   }, [])
 
-  const scrollTo
+  const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
     setMenuOpen(false)
   }
