@@ -396,27 +396,7 @@ function HomePage() {
     document.title = '九维精酿｜Jumpwire'
   }, [])
 
-  useEffect(() => {
-    if (window.location.pathname !== '/') return undefined
 
-    window.dataLayer = window.dataLayer || []
-    const previousGtag = window.gtag
-    function gtag() { window.dataLayer.push(arguments) }
-    window.gtag = gtag
-    gtag('js', new Date())
-
-    const script = document.createElement('script')
-    script.async = true
-    script.id = 'jumpwire-gtm'
-    script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5KM7DR2X'
-    document.head.appendChild(script)
-
-    return () => {
-      script.remove()
-      if (previousGtag) window.gtag = previousGtag
-      else delete window.gtag
-    }
-  }, [])
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })

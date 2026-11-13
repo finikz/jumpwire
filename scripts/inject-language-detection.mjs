@@ -60,22 +60,37 @@ const script = `(() => {
   let path = location.pathname;
   try { path = decodeURIComponent(path); } catch {}
   path = path.replace(/\\/+$/, '') || '/';
-  if (path === '/en' || path.startsWith('/en/')) return;
 
-  let language;
-  try { language = localStorage.getItem(preferenceKey); } catch {}
-  if (language !== 'zh' && language !== 'en') {
-    const locale = (navigator.languages && navigator.languages[0]) || navigator.language || '';
-    language = /^zh(?:[-_]|$)/i.test(locale) ? 'zh' : 'en';
+  if (path !== '/en' && !path.startsWith('/en/')) {
+    let language;
+    try { language = localStorage.getItem(preferenceKey); } catch {}
+    if (language !== 'zh' && language !== 'en') {
+      const locale = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+      language = /^zh(?:[-_]|$)/i.test(locale) ? 'zh' : 'en';
+    }
+
+    if (language === 'en') {
+      const cleanPath = path.replace(/\\/index\\.html$/, '');
+      const noteCopy = cleanPath.match(/^\\/notes\\/(.+?)\\s+\\d+$/);
+      const destination = routes[path] || routes[cleanPath] || (noteCopy && routes['/notes/' + noteCopy[1]]);
+      if (destination) {
+        const [targetPath, targetHash] = destination.split('#', 2);
+        location.replace(targetPath + location.search + (targetHash ? '#' + targetHash : location.hash));
+        return;
+      }
+    }
   }
-  if (language !== 'en') return;
 
-  const cleanPath = path.replace(/\\/index\\.html$/, '');
-  const noteCopy = cleanPath.match(/^\\/notes\\/(.+?)\\s+\\d+$/);
-  const destination = routes[path] || routes[cleanPath] || (noteCopy && routes['/notes/' + noteCopy[1]]);
-  if (!destination) return;
-  const [targetPath, targetHash] = destination.split('#', 2);
-  location.replace(targetPath + location.search + (targetHash ? '#' + targetHash : location.hash));
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('js', new Date());
+
+  const analytics = document.createElement('script');
+  analytics.async = true;
+  analytics.id = 'jumpwire-gtm';
+  analytics.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5KM7DR2X';
+  document.head.appendChild(analytics);
 })();`
 
 await writeFile(resolve(publicRoot, 'language-detection.js'), `${script}\n`)
